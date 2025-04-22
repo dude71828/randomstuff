@@ -1,0 +1,45 @@
+from matplotlib import pyplot as plt
+import numpy as np
+import math
+
+step = 0.05
+start = 0
+end = 50
+nend = 0
+
+x = start
+y = 0
+f = 0.1
+eqn = "math.sin(y)"
+ff = -eval(eqn)-f
+
+
+xlst = []
+ylst = []
+
+while x <= end:
+    xlst.append(x)
+    ylst.append(y)
+    x += step
+    y += step*f
+    A = [[1, -step],[1,1]]
+    b = [f, eval(eqn)]
+    f, ff = np.linalg.solve(A, b)
+
+x = start
+y = 0
+f = 0.1
+eqn = "math.sin(y)"
+ff = -eval(eqn)-f
+
+while x >= nend:
+    xlst.append(x)
+    ylst.append(y)
+    x -= step
+    y -= step*f
+    A = [[1, step],[1,1]]
+    b = [f, eval(eqn)]
+    f, ff = np.linalg.solve(A, b)
+
+plt.scatter(xlst, ylst)
+plt.show()
